@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <h2>Chuck Norris Jokes</h2>
+
     <p>
-<button @click="created">Новая шутка!</button>
+<button @click="item.methods.getJoke()">Новая шутка!</button>
     </p>
     <p>
     <button @click="counter += 1; stateCounter()">Новая шутка каждые 3 секунды!</button>
@@ -25,9 +26,10 @@
 
 <script>
 import axios from 'axios'
-
+import item from "../components/item"
 export default {
   name: "Home",
+  Components: {item},
   data() {
     return {
       joke: '',
