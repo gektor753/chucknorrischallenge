@@ -3,7 +3,7 @@
     <h2>Chuck Norris Jokes</h2>
 
     <p>
-<button @click="item.methods.getJoke()">Новая шутка!</button>
+<button @click="getJoke()">Новая шутка!</button>
     </p>
     <p>
     <button @click="counter += 1; stateCounter()">Новая шутка каждые 3 секунды!</button>
@@ -14,7 +14,10 @@
     <p>
     <button @click="removeAll()">Удалить все шутки!</button>
     </p>
-    {{ joke }}
+    <item
+      :joke="joke"
+      />
+
    <li v-for="(joke,n) in favouriteJokes" :key="joke.favouriteJokes">
      <p>
        <span class ="joke"> {{ joke }}</span>
@@ -25,18 +28,19 @@
 </template>
 
 <script>
-import axios from 'axios'
-import item from "../components/item"
+import item from "@/components/item"
+import {getJoke} from "@/functions"
 export default {
   name: "Home",
-  Components: {item},
+components:{item},
   data() {
     return {
       joke: '',
       counter: 0,
       timer: null,
       favouriteJokes: [],
-      jokeF:''
+      jokeF:'',
+      getJoke
 
     }
   },
@@ -46,21 +50,11 @@ export default {
     }
   },
   methods: {
-    created() {
-      axios
-          .get('https://api.chucknorris.io/jokes/random')
-          .then(response => (this.joke = response.data.value))
-    },
-    updated() {
 
-      axios
-          .get('https://api.chucknorris.io/jokes/random')
-          .then(response => (this.joke = response.data.value))
-    },
     stateCounter() {
       if (this.counter % 2) {
         this.timer = setInterval(() => {
-          this.updated()
+          this.getJoke()
         }, 1000)
       } else {
         this.beforeDestroy()

@@ -1,35 +1,27 @@
 <template>
 
 <div id="item">
-
+{{ joke }}
 </div>
 </template>
 
 <script>
-import axios from 'axios'
+
 export default {
   name: "item",
-
-
-
-
-    methods: {
-      mounted() {
-        axios
-            .get('https://api.chucknorris.io/jokes/random')
-            .then(response => (this.joke = response.data.value))
-      }
-    },
-data() {
-return {
-  joke:''
-}
-    }
-
+  props:{
+    joke: String
+  }
 }
 
 </script>
 
 <style scoped>
+#item{
 
+  width: 300px;
+  border: 15px solid red;
+  padding: 50px;
+  margin: auto;
+}
 </style>
