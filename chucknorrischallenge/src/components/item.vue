@@ -2,6 +2,8 @@
 
 <div id="item">
 {{ joke }}
+
+  <button v-if="isDelete" @click="$emit('deleteClick')">Удалить!</button>
 </div>
 </template>
 
@@ -10,7 +12,8 @@
 export default {
   name: "item",
   props:{
-    joke: String
+    joke: String,
+    isDelete: Boolean
   }
 }
 

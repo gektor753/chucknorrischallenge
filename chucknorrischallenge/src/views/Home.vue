@@ -17,22 +17,21 @@
     <item
       :joke="joke"
       />
+    <list
+        :list="favouriteJokes"
+        v-on:deleteIt="removeJoke($event)"
+      />
 
-   <li v-for="(joke,n) in favouriteJokes" :key="joke.favouriteJokes">
-     <p>
-       <span class ="joke"> {{ joke }}</span>
-        <button @click="removeJoke(n)">Удалить!</button>
-     </p>
-        </li>
   </div>
 </template>
 
 <script>
 import item from "@/components/item"
 import {getJoke} from "@/functions"
+import list from "@/components/list"
 export default {
   name: "Home",
-components:{item},
+components:{item,list},
   data() {
     return {
       joke: '',
